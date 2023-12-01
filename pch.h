@@ -22,7 +22,7 @@
 #include <utility>
 #include <list>
 
-//#include "Util/stb_image.h"
+#include "Util/stb_image.h"
 
 
 using int8 = __int8;
