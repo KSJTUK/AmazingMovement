@@ -176,6 +176,23 @@
     <ClInclude Include="Util\TextureComponent.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\particle_geometry_shader.glsl" />
+    <None Include="Shader\light_object_fshader.glsl" />
+    <None Include="Shader\light_object_vshader.glsl" />
+    <None Include="Shader\object_fragment_shader.glsl" />
+    <None Include="Shader\object_tessel_control_shader.glsl" />
+    <None Include="Shader\object_tessel_evaluation_shader.glsl" />
+    <None Include="Shader\object_vertex_shader.glsl" />
+    <None Include="Shader\particle_fragment_shader.glsl" />
+    <None Include="Shader\particle_vertex_shader.glsl" />
+    <None Include="Shader\skybox_fragment_shader.glsl" />
+    <None Include="Shader\skybox_vertex_shader.glsl" />
+    <None Include="Shader\terrain_fragment_shader.glsl" />
+    <None Include="Shader\terrain_tessel_control_shader.glsl" />
+    <None Include="Shader\terrain_tessel_evaluation_shader.glsl" />
+    <None Include="Shader\terrain_vertex_shader.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

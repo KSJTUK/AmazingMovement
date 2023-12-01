@@ -37,6 +37,21 @@
     <Filter Include="소스 파일\Main">
       <UniqueIdentifier>{4078168b-13e0-4433-90d5-f3e0f5fe7898}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스 파일\Object">
+      <UniqueIdentifier>{b5cdbe07-f2f9-4abf-8303-c7e27cb92023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\SnowParticle">
+      <UniqueIdentifier>{5ad41541-9308-4e00-9614-44a2581edc76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\Terrain">
+      <UniqueIdentifier>{0e25cb56-d7cd-47e1-8753-af760aab511e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\SkyBox">
+      <UniqueIdentifier>{42b361a9-57ad-4195-b1e9-de1feb9c3b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일\LightObject">
+      <UniqueIdentifier>{cd1a81ee-c8d4-421b-837d-3dfed3740bcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -116,5 +131,52 @@
     <ClInclude Include="Util\callbacks.h">
       <Filter>헤더 파일\Util</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\particle_geometry_shader.glsl">
+      <Filter>리소스 파일\SnowParticle</Filter>
+    </None>
+    <None Include="Shader\particle_fragment_shader.glsl">
+      <Filter>리소스 파일\SnowParticle</Filter>
+    </None>
+    <None Include="Shader\particle_vertex_shader.glsl">
+      <Filter>리소스 파일\SnowParticle</Filter>
+    </None>
+    <None Include="Shader\object_fragment_shader.glsl">
+      <Filter>리소스 파일\Object</Filter>
+    </None>
+    <None Include="Shader\object_tessel_control_shader.glsl">
+      <Filter>리소스 파일\Object</Filter>
+    </None>
+    <None Include="Shader\object_tessel_evaluation_shader.glsl">
+      <Filter>리소스 파일\Object</Filter>
+    </None>
+    <None Include="Shader\object_vertex_shader.glsl">
+      <Filter>리소스 파일\Object</Filter>
+    </None>
+    <None Include="Shader\light_object_fshader.glsl">
+      <Filter>리소스 파일\LightObject</Filter>
+    </None>
+    <None Include="Shader\light_object_vshader.glsl">
+      <Filter>리소스 파일\LightObject</Filter>
+    </None>
+    <None Include="Shader\skybox_fragment_shader.glsl">
+      <Filter>리소스 파일\SkyBox</Filter>
+    </None>
+    <None Include="Shader\skybox_vertex_shader.glsl">
+      <Filter>리소스 파일\SkyBox</Filter>
+    </None>
+    <None Include="Shader\terrain_fragment_shader.glsl">
+      <Filter>리소스 파일\Terrain</Filter>
+    </None>
+    <None Include="Shader\terrain_tessel_control_shader.glsl">
+      <Filter>리소스 파일\Terrain</Filter>
+    </None>
+    <None Include="Shader\terrain_tessel_evaluation_shader.glsl">
+      <Filter>리소스 파일\Terrain</Filter>
+    </None>
+    <None Include="Shader\terrain_vertex_shader.glsl">
+      <Filter>리소스 파일\Terrain</Filter>
+    </None>
   </ItemGroup>
 </Project>

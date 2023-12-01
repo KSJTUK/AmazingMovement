@@ -6,25 +6,25 @@
 void renderFunc()
 {
 	// rendering function
-	//engine->Render();
+	engine->Render();
 }
 
 void reshapeFunc(int x, int y)
 {
-	//engine->ReSizeWindow(x, y);
+	engine->ReSizeWindow(x, y);
 }
 
 void idleFunc()
 {
 	// Frame객체의 Update함수 사용
-	//engine->Update();
+	engine->Update();
 	glutPostRedisplay();
 }
 
 
 void keyboardFunc(unsigned char key, int x, int y)
 {
-	//engine->Input(key, true);
+	engine->Input(key, true);
 }
 
 void keyboardUpFunc(unsigned char key, int x, int y)
@@ -33,7 +33,7 @@ void keyboardUpFunc(unsigned char key, int x, int y)
 
 void specialkeyFunc(int key, int x, int y)
 {
-	//engine->SpecialInput(key, true);
+	engine->SpecialInput(key, true);
 }
 
 void specialKeyUpFunc(int key, int x, int y)

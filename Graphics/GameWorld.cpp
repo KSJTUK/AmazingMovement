@@ -107,6 +107,7 @@ void GameWorld::SetGLGraphicOptions() {
 }
 
 void GameWorld::Init() {
+	CreateShaderPrograms();
 	SetGLGraphicOptions();
 
 	// 朝五虞 持失

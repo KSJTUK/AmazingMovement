@@ -414,7 +414,7 @@ void ParticleShader::CreateShaderProgram() {
 	m_shaderProgram = glCreateProgram();
 	LoadVertexShaderFile(".\\Shader\\particle_vertex_shader.glsl");
 	LoadFragmentShaderFile(".\\Shader\\particle_fragment_shader.glsl");
-	LoadGeometryShader(".\\Shader\\geometry_shader.glsl");
+	LoadGeometryShader(".\\Shader\\particle_geometry_shader.glsl");
 	CompileShaders();
 	AttachAndLinkShaders();
 }

@@ -59,7 +59,7 @@ void main()
     vec4 p1 = (p11 - p10) * u + p10;
     vec4 p = (p1 - p0) * v + p0 + normal * height;
 
-    gl_Position = perspectiveMat * p;
+    gl_Position = perspective * p;
 
     tes_out_tex = texCoord;
     tes_out_normal = vec3(normal);
