@@ -146,18 +146,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Graphics\Camera.cpp" />
+    <ClCompile Include="Graphics\GameWorld.cpp" />
+    <ClCompile Include="Graphics\GraphicBuffers.cpp" />
+    <ClCompile Include="Graphics\Shader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model\Model.cpp" />
+    <ClCompile Include="Model\ModelList.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Util\stb_image.cpp" />
+    <ClCompile Include="Util\TextureComponent.cpp" />
     <ClCompile Include="Util\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Graphics\Camera.h" />
+    <ClInclude Include="Graphics\GameWorld.h" />
+    <ClInclude Include="Graphics\GraphicBuffers.h" />
+    <ClInclude Include="Graphics\Shader.h" />
+    <ClInclude Include="Model\Model.h" />
+    <ClInclude Include="Model\ModelList.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Util\stb_image.h" />
+    <ClInclude Include="Util\TextureComponent.h" />
     <ClInclude Include="Util\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
