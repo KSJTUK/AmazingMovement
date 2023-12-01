@@ -93,6 +93,7 @@ void CubeMapTexture::LoadCubeMapTexture(const std::string& posX, const std::stri
 	CubeMapInfo texInfo{ };
 	glGenTextures(1, &texInfo.id);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texInfo.id);
+	SetCubeMapTextureOption();
 
 	for (int i = 0; i < cubeSize; ++i) {
 		stbi_set_flip_vertically_on_load(flipImageOnLoad);
@@ -122,7 +123,6 @@ void CubeMapTexture::LoadCubeMapTexture(const std::string& posX, const std::stri
 
 		stbi_image_free(imageData);
 	}
-	SetCubeMapTextureOption();
 
 	m_cubeMaps.push_back(texInfo);
 }
@@ -130,6 +130,11 @@ void CubeMapTexture::LoadCubeMapTexture(const std::string& posX, const std::stri
 void CubeMapTexture::BindCubeMap(int cubeMapIndex) {
 	glActiveTexture(GL_TEXTURE0 + cubeMapIndex);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubeMaps[cubeMapIndex].id);
+}
+
+void CubeMapTexture::BindCubeMap() {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubeMaps[0].id);
 }
 
 void CubeMapTexture::UnBindCubeMap() {

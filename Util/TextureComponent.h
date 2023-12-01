@@ -35,5 +35,6 @@ public:
 		const std::string& negY, const std::string& posZ, const std::string& negZ, bool);
 
 	void BindCubeMap(int cubeMapIndex);
+	void BindCubeMap();
 	void UnBindCubeMap();
 };

@@ -5,6 +5,7 @@
 #include "Model/ModelList.h"
 
 #include "Graphics/SkyBox.h"
+#include "Graphics/Terrain.h"
 
 GameWorld::GameWorld() { }
 
@@ -72,8 +73,7 @@ void GameWorld::SetPerspectiveAllShader() {
 void GameWorld::SetViewMatAllShader() {
 	glm::mat4 cameraViewMatrix{ m_camera->GetViewMat() };
 
-	//BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
-	BACKGROUNDSHADER->SetUniformMat4("view", cameraViewMatrix);
+	BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
 	TERRAINSHADER->SetUniformMat4("view", cameraViewMatrix);
 	PARTICLESHADER->SetUniformMat4("view", cameraViewMatrix);
 	OBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
@@ -98,13 +98,12 @@ void GameWorld::Init() {
 	CreateShaderPrograms();
 	SetGLGraphicOptions();
 
-	OBJECTSHADER->UseProgram();
-
 	// 朝五虞 持失
 	m_camera = std::make_unique<Camera>();
 
 	// SkyBox 持失
 	m_background = std::make_unique<SkyBox>();
+	m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	InitModelList();
 
@@ -129,6 +128,7 @@ void GameWorld::Render() {
 	SetViewMatAllShader();
 
 	m_background->Render();
+	//m_ground->Render();
 
 	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
 

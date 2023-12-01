@@ -75,19 +75,20 @@ SkyBox::SkyBox() {
 SkyBox::~SkyBox() { }
 
 void SkyBox::Render() {
+	BACKGROUNDSHADER->SetUniformInt("cubeMapTexture", 0);
+
 	BACKGROUNDSHADER->UseProgram();
 
 	glDepthFunc(GL_LEQUAL);
 
 	glBindVertexArray(m_VAO);
-	m_textures->BindCubeMap(0);
-	BACKGROUNDSHADER->SetUniformInt("cubeMapTexture", 0);
+	m_textures->BindCubeMap();
 
 	glDrawArrays(GL_TRIANGLES, 0, uint32(m_verticies.size()));
 	m_textures->UnBindCubeMap();
 	glBindVertexArray(0);
 
-	//glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LESS);
 
 	BACKGROUNDSHADER->UnUseProgram();
 }
