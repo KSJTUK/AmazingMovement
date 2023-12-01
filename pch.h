@@ -81,3 +81,10 @@ namespace constants {
 	extern float gravity;
 	extern float epsilon;
 };
+
+#define OBJECTSHADER ObjectShader::GetInstance()
+#define LIGHTOBJECTSHADER LightObjectShader::GetInstance()
+#define PARTICLESHADER ParticleShader::GetInstance()
+#define TERRAINSHADER TerrainShader::GetInstance()
+#define BACKGROUNDSHADER BackGroundShader::GetInstance()
+#define MODELLIST ModelList::GetInstance()

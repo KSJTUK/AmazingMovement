@@ -113,57 +113,75 @@ void Shader::CheckAndPrintShaderCompileError(const uint32& shaderID) {
 }
 
 void Shader::SetUniformMat4(const std::string& valName, const glm::mat4& matrix) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniformMatrix4fv(valLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+	UnUseProgram();
 }
 
 void Shader::SetUniformMat3(const std::string& valName, const glm::mat3& matrix) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniformMatrix3fv(valLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+	UnUseProgram();
 }
 
 void Shader::SetUniformMat2(const std::string& valName, const glm::mat2& matrix) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniformMatrix2fv(valLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+	UnUseProgram();
 }
 
 void Shader::SetUniformVec4(const std::string& valName, const glm::vec4& vector) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform4fv(valLocation, 1, glm::value_ptr(vector));
+	UnUseProgram();
 }
 
 void Shader::SetUniformVec3(const std::string& valName, const glm::vec3& vector) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform3fv(valLocation, 1, glm::value_ptr(vector));
+	UnUseProgram();
 }
 
 void Shader::SetUniformVec2(const std::string& valName, const glm::vec2& vector) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform2fv(valLocation, 1, glm::value_ptr(vector));
+	UnUseProgram();
 }
 
 void Shader::SetUniformFloat(const std::string& valName, const float& fValue) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform1fv(valLocation, 1, &fValue);
+	UnUseProgram();
 }
 
 void Shader::SetUniformInt(const std::string& valName, const int& iValue) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform1iv(valLocation, 1, &iValue);
+	UnUseProgram();
 }
 
 void Shader::SetUniformBool(const std::string& valName, const int& bValue) {
+	UseProgram();
 	int valLocation{ glGetUniformLocation(m_shaderProgram, valName.c_str()) };
 	assert(!(valLocation == -1));
 	glUniform1iv(valLocation, 1, &bValue);
+	UnUseProgram();
 }
 
 ObjectShader* ObjectShader::m_instance = nullptr;
