@@ -72,20 +72,20 @@ void GameWorld::CreateShaderPrograms() {
 }
 
 void GameWorld::SetPerspectiveAllShader() {
-	BACKGROUNDSHADER->SetUniformMat4("perspectiveMat", m_perspectiveMatrix);
-	TERRAINSHADER->SetUniformMat4("perspectiveMat", m_perspectiveMatrix);
-	PARTICLESHADER->SetUniformMat4("perspectiveMat", m_perspectiveMatrix);
-	OBJECTSHADER->SetUniformMat4("perspectiveMat", m_perspectiveMatrix);
+	BACKGROUNDSHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
+	TERRAINSHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
+	PARTICLESHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
+	OBJECTSHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
 	LIGHTOBJECTSHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
 }
 
 void GameWorld::SetViewMatAllShader() {
 	glm::mat4 cameraViewMatrix{ m_camera->GetViewMat() };
 
-	BACKGROUNDSHADER->SetUniformMat4("viewMat", glm::mat4(glm::mat3(cameraViewMatrix)));
-	TERRAINSHADER->SetUniformMat4("viewMat", cameraViewMatrix);
-	PARTICLESHADER->SetUniformMat4("viewMat", cameraViewMatrix);
-	OBJECTSHADER->SetUniformMat4("viewMat", cameraViewMatrix);
+	BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
+	TERRAINSHADER->SetUniformMat4("view", cameraViewMatrix);
+	PARTICLESHADER->SetUniformMat4("view", cameraViewMatrix);
+	OBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
 	LIGHTOBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
 }
 

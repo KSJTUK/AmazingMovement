@@ -267,7 +267,6 @@ void ObjectShader::CreateShaderProgram() {
 	LoadFragmentShaderFile(".\\Shader\\object_fragment_shader.glsl");
 	//LoadTesselationControlShaderFile(".\\Shader\\object_tessel_control_shader.glsl");
 	//LoadTesselationEvaluationShaderFile(".\\Shader\\object_tessel_evaluation_shader.glsl");
-	//LoadGeometryShader(".\\Shader\\geometry_shader.glsl");
 	CompileShaders();
 	AttachAndLinkShaders();
 }
