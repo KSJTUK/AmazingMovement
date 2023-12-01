@@ -149,6 +149,7 @@
     <ClCompile Include="Graphics\GameWorld.cpp" />
     <ClCompile Include="Graphics\GraphicBuffers.cpp" />
     <ClCompile Include="Graphics\Shader.cpp" />
+    <ClCompile Include="Graphics\SkyBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\ModelList.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Graphics\GameWorld.h" />
     <ClInclude Include="Graphics\GraphicBuffers.h" />
     <ClInclude Include="Graphics\Shader.h" />
+    <ClInclude Include="Graphics\SkyBox.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\ModelList.h" />
     <ClInclude Include="pch.h" />

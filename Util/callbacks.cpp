@@ -56,7 +56,7 @@ void mouseRightDown(int state, int x, int y)
 
 void mouseMotion(int x, int y)
 {
-	//engine->MouseMotionInput(x, y);
+	engine->MouseMotionInput(x, y);
 }
 
 void mousePassiveMotion(int x, int y)

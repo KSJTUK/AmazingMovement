@@ -110,32 +110,29 @@ void Camera::ViewPointMove(float moveAngle, const glm::vec3& axis) {
 	m_AT = glm::normalize(glm::rotate(m_AT, glm::radians(moveAngle), axis));
 }
 
-void Camera::Init() {
-
-}
-
 void Camera::Update(float deltaTime) {
+	//OBJECTSHADER->UseProgram();
+
 	m_deltaTime = deltaTime;
 
 	// 카메라 기저 계산 순서 -> n, u, v -> 카메라 z, x, y축
 	m_cameraAxisZ = glm::normalize(-m_AT);
 	m_cameraAxisX = glm::normalize(glm::cross(m_UP, m_cameraAxisZ));
 	m_cameraAxisY = glm::normalize(glm::cross(m_cameraAxisZ, m_cameraAxisX));
-	OBJECTSHADER->UseProgram();
 
-	// for all lighting
-	OBJECTSHADER->SetUniformVec3("viewPosition", m_EYE);
+	//// for all lighting
+	//OBJECTSHADER->SetUniformVec3("viewPosition", m_EYE);
 
-	if (m_spotLightingOn) {
-		//// for flash lighting values
-		OBJECTSHADER->SetUniformVec3("spotLight.position", m_EYE);
-		OBJECTSHADER->SetUniformVec3("spotLight.direction", m_AT);
+	//if (m_spotLightingOn) {
+	//	//// for flash lighting values
+	//	OBJECTSHADER->SetUniformVec3("spotLight.position", m_EYE);
+	//	OBJECTSHADER->SetUniformVec3("spotLight.direction", m_AT);
 
-		OBJECTSHADER->SetUniformFloat("spotLight.cutOff", std::cosf(glm::radians(7.5f)));
-		OBJECTSHADER->SetUniformFloat("spotLight.outerCutOff", std::cosf(glm::radians(17.5f)));
-	}
+	//	OBJECTSHADER->SetUniformFloat("spotLight.cutOff", std::cosf(glm::radians(7.5f)));
+	//	OBJECTSHADER->SetUniformFloat("spotLight.outerCutOff", std::cosf(glm::radians(17.5f)));
+	//}
 
-	OBJECTSHADER->UnUseProgram();
+	//OBJECTSHADER->UnUseProgram();
 }
 
 void Camera::Render() {

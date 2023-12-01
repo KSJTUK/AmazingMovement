@@ -4,7 +4,7 @@
 #include "Graphics/Camera.h"
 #include "Model/ModelList.h"
 
-#include "Util/TextureComponent.h"
+#include "Graphics/SkyBox.h"
 
 GameWorld::GameWorld() { }
 
@@ -36,16 +36,6 @@ void GameWorld::Input(unsigned char key, bool down) {
 
 void GameWorld::SpecialInput(int key, bool down) {
 	if (down) {
-		if (key == GLUT_KEY_F1) {
-			OBJECTSHADER->UseProgram();
-			OBJECTSHADER->UnUseProgram();
-		}
-
-		if (key == GLUT_KEY_F2) {
-			OBJECTSHADER->UseProgram();
-			OBJECTSHADER->UnUseProgram();
-		}
-
 		if (key == GLUT_KEY_F3) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
@@ -82,7 +72,8 @@ void GameWorld::SetPerspectiveAllShader() {
 void GameWorld::SetViewMatAllShader() {
 	glm::mat4 cameraViewMatrix{ m_camera->GetViewMat() };
 
-	BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
+	//BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
+	BACKGROUNDSHADER->SetUniformMat4("view", cameraViewMatrix);
 	TERRAINSHADER->SetUniformMat4("view", cameraViewMatrix);
 	PARTICLESHADER->SetUniformMat4("view", cameraViewMatrix);
 	OBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
@@ -93,10 +84,6 @@ void GameWorld::InitModelList() {
 	// 모델리스트를 생성하고 모델 불러오기
 	MODELLIST->Init();
 	MODELLIST->LoadModel("cube.obj");
-	//MODELLIST->LoadModel("cone.obj");
-	//MODELLIST->LoadModel("sphere.obj");
-	//MODELLIST->LoadModel("cylinder.obj");
-	//MODELLIST->LoadModel("earth.obj", "Earth_diffuse_512p.png");
 }
 
 void GameWorld::SetGLGraphicOptions() {
@@ -104,15 +91,20 @@ void GameWorld::SetGLGraphicOptions() {
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void GameWorld::Init() {
 	CreateShaderPrograms();
 	SetGLGraphicOptions();
 
+	OBJECTSHADER->UseProgram();
+
 	// 카메라 생성
 	m_camera = std::make_unique<Camera>();
-	m_camera->Init();
+
+	// SkyBox 생성
+	m_background = std::make_unique<SkyBox>();
 
 	InitModelList();
 
@@ -120,8 +112,6 @@ void GameWorld::Init() {
 	CalcPerspectiveMat();
 
 	m_isInited = true;
-	
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void GameWorld::Update(float deltaTime) {
@@ -130,14 +120,15 @@ void GameWorld::Update(float deltaTime) {
 }
 
 void GameWorld::Render() {
-
-	glClearColor(1.f, 1.f, 1.f, 1.f);
+	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
 	m_camera->Render();
 	SetPerspectiveAllShader();
 	SetViewMatAllShader();
+
+	m_background->Render();
 
 	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
 
