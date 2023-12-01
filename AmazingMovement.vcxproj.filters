@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Engine">
-      <UniqueIdentifier>{7de3e8ce-9e27-415f-a2f2-63cf085c974f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\Engine">
-      <UniqueIdentifier>{3a5d93e0-3dfc-42ec-adae-5d045dc3bb7a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="pch">
       <UniqueIdentifier>{e595a37e-d9bb-4cfd-968a-311a72caded8}</UniqueIdentifier>
     </Filter>
@@ -40,22 +34,16 @@
     <Filter Include="헤더 파일\Graphics">
       <UniqueIdentifier>{9e0dd92e-5bb7-46ab-99d6-9ae490ca5cf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Main">
+      <UniqueIdentifier>{4078168b-13e0-4433-90d5-f3e0f5fe7898}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
     </ClCompile>
     <ClCompile Include="Util\stb_image.cpp">
       <Filter>소스 파일\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Engine.cpp">
-      <Filter>소스 파일\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Timer.cpp">
-      <Filter>소스 파일\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Model\Model.cpp">
       <Filter>소스 파일\Model</Filter>
@@ -78,19 +66,25 @@
     <ClCompile Include="Graphics\Shader.cpp">
       <Filter>소스 파일\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Util\Timer.cpp">
+      <Filter>소스 파일\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Engine.cpp">
+      <Filter>소스 파일\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\callbacks.cpp">
+      <Filter>소스 파일\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Engine.h">
-      <Filter>헤더 파일\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Util\stb_image.h">
       <Filter>헤더 파일\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Timer.h">
-      <Filter>헤더 파일\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Model\Model.h">
       <Filter>헤더 파일\Model</Filter>
@@ -112,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="Graphics\Shader.h">
       <Filter>헤더 파일\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Timer.h">
+      <Filter>헤더 파일\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Engine.h">
+      <Filter>헤더 파일\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\callbacks.h">
+      <Filter>헤더 파일\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
