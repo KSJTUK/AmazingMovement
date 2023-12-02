@@ -49,6 +49,8 @@ public:
 	void InitModelList();
 	void SetGLGraphicOptions();
 
+	void WorldRender();
+
 public:
 	void Init();
 	void Update(float deltaTime);

@@ -11,6 +11,16 @@ AnimationCubes::AnimationCubes(const float xzMapSize, const glm::uvec2& numOfCub
 
 AnimationCubes::~AnimationCubes() { }
 
+void AnimationCubes::StepSort() {
+	if (!m_sortFunc) return;
+
+	if (m_timeCount > m_sortTime) {
+		(this->*m_sortFunc)();
+	}
+	
+	m_timeCount += m_deltaTime;
+}
+
 void AnimationCubes::SetScaleRange(const float& min, const float& max) {
 	m_scaleRange = { min, max };
 }
@@ -60,7 +70,16 @@ void AnimationCubes::SetWaveAnimation() {
 	}
 }
 
+void AnimationCubes::SetSortAnimation() {
+
+}
+
+void AnimationCubes::BubbleSort() {
+}
+
 void AnimationCubes::Update(float deltaTime) {
+	m_deltaTime = deltaTime;
+
 	for (auto& cubeVec : m_cubes) {
 		for (auto& cube : cubeVec) {
 			cube.Update(deltaTime);

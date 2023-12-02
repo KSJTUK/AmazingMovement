@@ -101,6 +101,19 @@ void GameWorld::SetGLGraphicOptions() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
+void GameWorld::WorldRender() {
+	m_camera->Render();
+	SetPerspectiveAllShader();
+	SetViewMatAllShader();
+
+	m_background->Render();
+
+	m_testLight->Render();
+	m_ground->Render();
+
+	m_testAnimationCubes->Render();
+}
+
 void GameWorld::Init() {
 	CreateShaderPrograms();
 	SetGLGraphicOptions();
@@ -142,17 +155,7 @@ void GameWorld::Render() {
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-	m_camera->Render();
-	SetPerspectiveAllShader();
-	SetViewMatAllShader();
-
-	m_background->Render();
-
-	m_testLight->Render();
-	m_ground->Render();
-
-	m_testAnimationCubes->Render();
+	WorldRender();
 
 	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
 
