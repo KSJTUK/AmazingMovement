@@ -16,5 +16,6 @@ public:
 	glm::vec3 GetRandVec3(const glm::vec3& min, const glm::vec3& max);
 	glm::vec4 GetRandVec4(const glm::vec4& min, const glm::vec4& max);
 
+	std::default_random_engine& GetRandomEngine() { return m_dre; }
 };
 

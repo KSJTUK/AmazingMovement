@@ -16,7 +16,7 @@ private:
 	// 스크린 화면의 크기를 알아내기 위한 WindowInfo객체 참조
 	std::shared_ptr<struct WindowInfo> m_windowInfo{ }; // aspect(종횡비) = width / height
 	std::unique_ptr<class SkyBox> m_background{ }; // SkyBox 배경
-	std::unique_ptr<class Terrain> m_ground{ };
+	//std::unique_ptr<class Terrain> m_ground{ };
 
 	float m_near{ 0.1f };           // 시야 절두체의 가까운 평면과의 거리
 	float m_far{ 10000.f };           // 시야 절두체의 먼 평면과의 거리

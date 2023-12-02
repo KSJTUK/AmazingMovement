@@ -28,9 +28,10 @@ private:
 	std::pair<float, float> m_scaleRange{ 0.1f, 50.f };
 	std::pair<float, float> m_animationSpeedRange{ 1.f, 50.f };
 
-	float m_sortTime{ 1.f };
+	float m_sortTime{ 0.01f };
 	float m_timeCount{ };
 
+	const int m_numSortData{ 100 };
 	void(AnimationCubes::*m_sortFunc)(){ nullptr };
 	bool m_sortEnd{ false };
 
@@ -38,6 +39,7 @@ private:
 
 private:
 	void MakeCubes();
+	void MakeSortCubes();
 
 	void SuffleData();
 	void ResetColor();
