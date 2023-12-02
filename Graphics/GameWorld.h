@@ -23,7 +23,7 @@ private:
 
 	glm::mat4 m_perspectiveMatrix{ 1.f };
 
-	std::unique_ptr<class Cube> m_testCube{ };
+	std::unique_ptr<class AnimationCubes> m_testAnimationCubes{ };
 	std::unique_ptr<class LightObject> m_testLight{ };
 
 	float m_deltaTime{ };

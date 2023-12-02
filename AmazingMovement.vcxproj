@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AniamtionCubes.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\GameWorld.cpp" />
     <ClCompile Include="Graphics\GraphicBuffers.cpp" />
@@ -155,6 +154,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model\Model.cpp" />
     <ClCompile Include="Model\ModelList.cpp" />
+    <ClCompile Include="Object\AnimationCubes.cpp" />
     <ClCompile Include="Object\Cube.cpp" />
     <ClCompile Include="Object\LightObject.cpp" />
     <ClCompile Include="Object\Object.cpp" />
@@ -169,7 +169,6 @@
     <ClCompile Include="Util\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AniamtionCubes.h" />
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\GameWorld.h" />
     <ClInclude Include="Graphics\GraphicBuffers.h" />
@@ -178,6 +177,7 @@
     <ClInclude Include="Graphics\Terrain.h" />
     <ClInclude Include="Model\Model.h" />
     <ClInclude Include="Model\ModelList.h" />
+    <ClInclude Include="Object\AnimationCubes.h" />
     <ClInclude Include="Object\Cube.h" />
     <ClInclude Include="Object\LightObject.h" />
     <ClInclude Include="Object\Object.h" />

@@ -7,7 +7,7 @@
 #include "Graphics/SkyBox.h"
 #include "Graphics/Terrain.h"
 
-#include "Object/Cube.h"
+#include "Object/AnimationCubes.h"
 #include "Object/LightObject.h"
 
 GameWorld::GameWorld() { }
@@ -114,9 +114,7 @@ void GameWorld::Init() {
 	m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	// 테스트용 큐브 생성
-	m_testCube = std::make_unique<Cube>(glm::vec3{ 0.f, 1.f, 0.f });
-	m_testCube->SetPosition(glm::vec3{ 0.f, 10.f, 0.f });
-	m_testCube->SetScale(glm::vec3{ 5.f });
+	m_testAnimationCubes = std::make_unique<AnimationCubes>(100.f, glm::uvec2{ 10, 10 });
 
 	m_testLight = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
 	m_testLight->SetPosition(glm::vec3{ 0.f, 100.f, 30.f });
@@ -136,7 +134,7 @@ void GameWorld::Update(float deltaTime) {
 	m_deltaTime = deltaTime;
 	m_camera->Update(m_deltaTime);
 
-	m_testCube->Update(m_deltaTime);
+	m_testAnimationCubes->Update(m_deltaTime);
 }
 
 void GameWorld::Render() {
@@ -153,7 +151,7 @@ void GameWorld::Render() {
 	m_testLight->Render();
 	m_ground->Render();
 
-	m_testCube->Render();
+	m_testAnimationCubes->Render();
 
 	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
 

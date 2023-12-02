@@ -5,10 +5,16 @@
 
 Cube::Cube(const glm::vec3& color) : Object{ "cube", color } { }
 
+Cube::Cube(const glm::vec3& color, const glm::vec3& position, const glm::vec3& scale) : Object{ "cube", color } {
+	m_position = position;
+	m_scale = scale;
+}
+
 Cube::~Cube() { }
 
-void Cube::SetAnimationOption(const std::pair<float, float>& animationRange) {
+void Cube::SetAnimationOption(const std::pair<float, float>& animationRange, const float& speed) {
 	m_scaleAnimationRange = animationRange;
+	m_scaleAnimationSpeed = speed;
 }
 
 void Cube::ScaleAnimation() {
@@ -22,6 +28,10 @@ void Cube::ScaleAnimation() {
 	}
 	
 	m_scale.y += m_scaleDirection * m_scaleAnimationSpeed * m_deltaTime;
+}
+
+void Cube::SetAnimationSpeed(const float& speed) {
+	m_scaleAnimationSpeed = speed;
 }
 
 void Cube::SetUniformMeterials() {

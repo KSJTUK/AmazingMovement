@@ -4,6 +4,7 @@
 class Cube : public Object {
 public:
 	Cube(const glm::vec3& color);
+	Cube(const glm::vec3& color, const glm::vec3& position, const glm::vec3& scale);
 	virtual ~Cube();
 
 private:
@@ -18,8 +19,9 @@ private:
 	float m_scaleDirection{ 1.f };
 	
 public:
-	void SetAnimationOption(const std::pair<float, float>& animationRange);
+	void SetAnimationOption(const std::pair<float, float>& animationRange, const float& speed);
 	void ScaleAnimation();
+	void SetAnimationSpeed(const float& speed);
 
 public:
 	void SetMeterials(const Meterial& meterial);
