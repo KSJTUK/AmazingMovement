@@ -33,6 +33,9 @@ public:
 public:
 	void SetUniformMeterials();
 
+	glm::vec3 GetScale() { return m_scale; }
+	float GetScaleY() { return m_scale.y; }
+
 public:
 	virtual void Update(float deltaTime) override;
 	virtual void Render() override;

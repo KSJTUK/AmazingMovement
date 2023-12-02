@@ -16,6 +16,10 @@ void Object::SetScale(const glm::vec3& scale) {
 	m_scale = scale;
 }
 
+void Object::SetScaleY(const float& yScale) {
+	m_scale.y = yScale;
+}
+
 void Object::PositionSwap(Object& other) {
 	glm::vec3 temp{ };
 	temp = other.m_position;

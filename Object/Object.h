@@ -20,6 +20,7 @@ protected:
 public:
 	void SetPosition(const glm::vec3& position);
 	void SetScale(const glm::vec3& scale);
+	void SetScaleY(const float& yScale);
 	void PositionSwap(Object& other);
 	void ScaleSwap(Object& other);
 	void SetColor(const glm::vec3& color);
