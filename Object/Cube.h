@@ -7,11 +7,17 @@ public:
 	virtual ~Cube();
 
 private:
-	const std::pair<float, float> m_scaleAnimationRange{ 1.f, 200.f };
-	const std::pair<float, float> m_xzScale{ };
+	float m_deltaTime{ };
+
+	std::pair<float, float> m_scaleAnimationRange{ 1.f, 50.f };
+	std::pair<float, float> m_xzScale{ };
+
+	float m_scaleAnimationSpeed{ 10.f };
+	float m_scaleDirection{ 1.f };
 	
 public:
 	void SetAnimationOption(const std::pair<float, float>& animationRange);
+	void ScaleAnimation();
 
 public:
 	void SetMeterials(const Meterial& meterial);

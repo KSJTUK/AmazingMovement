@@ -40,8 +40,8 @@ void LightObject::SetLightOption() {
 	OBJECTSHADER->SetUniformVec3("pointLight.specular", m_lightOption.specular);
 
 	OBJECTSHADER->SetUniformFloat("pointLight.constant", 1.0f);
-	OBJECTSHADER->SetUniformFloat("pointLight.linear", 0.00014f);
-	OBJECTSHADER->SetUniformFloat("pointLight.quadratic", 0.000007f);
+	OBJECTSHADER->SetUniformFloat("pointLight.linear", 0.0014f);
+	OBJECTSHADER->SetUniformFloat("pointLight.quadratic", 0.00007f);
 
 	if (m_spotLightOn) {
 		OBJECTSHADER->SetUniformVec3("spotLight.ambient", ambientColor);

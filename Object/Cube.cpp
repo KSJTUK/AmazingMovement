@@ -7,6 +7,23 @@ Cube::Cube(const std::string modelTag, const glm::vec3& color) : Object{ modelTa
 
 Cube::~Cube() { }
 
+void Cube::SetAnimationOption(const std::pair<float, float>& animationRange) {
+	m_scaleAnimationRange = animationRange;
+}
+
+void Cube::ScaleAnimation() {
+	if (m_scale.y > m_scaleAnimationRange.second) {
+		m_scale.y = m_scaleAnimationRange.second;
+		m_scaleDirection = -1.f;
+	}
+	else if (m_scale.y < m_scaleAnimationRange.first) {
+		m_scale.y = m_scaleAnimationRange.first;
+		m_scaleDirection = 1.f;
+	}
+	
+	m_scale.y += m_scaleDirection * m_scaleAnimationSpeed * m_deltaTime;
+}
+
 void Cube::SetUniformMeterials() {
 	OBJECTSHADER->SetUniformInt("meterials.diffuse", 0);
 	OBJECTSHADER->SetUniformVec3("meterials.specular", m_meterial.specular);
@@ -14,7 +31,8 @@ void Cube::SetUniformMeterials() {
 }
 
 void Cube::Update(float deltaTime) {
-
+	m_deltaTime = deltaTime;
+	ScaleAnimation();
 }
 
 void Cube::Render() { 
