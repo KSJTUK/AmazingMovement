@@ -108,10 +108,10 @@ void GameWorld::WorldRender() {
 
 	m_background->Render();
 
-	m_testLight->Render();
+	m_light->Render();
 	//m_ground->Render();
 
-	m_testAnimationCubes->Render();
+	m_animationCubes->Render();
 }
 
 void GameWorld::Init() {
@@ -128,13 +128,13 @@ void GameWorld::Init() {
 	//m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	// 테스트용 큐브 생성
-	m_testAnimationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ 50, 50 });
+	m_animationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ 20, 20 });
 
-	m_testLight = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
-	m_testLight->SetPosition(glm::vec3{ 0.f, 100.f, 30.f });
-	m_testLight->SetScale(glm::vec3{ 0.1f });
+	m_light = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
+	m_light->SetPosition(glm::vec3{ 0.f, 100.f, 30.f });
+	m_light->SetScale(glm::vec3{ 0.1f });
 
-	m_testLight->DirLightOn();
+	m_light->DirLightOn();
 
 	InitModelList();
 
@@ -148,7 +148,7 @@ void GameWorld::Update(float deltaTime) {
 	m_deltaTime = deltaTime;
 	m_camera->Update(m_deltaTime);
 
-	m_testAnimationCubes->Update(m_deltaTime);
+	m_animationCubes->Update(m_deltaTime);
 }
 
 void GameWorld::Render() {
