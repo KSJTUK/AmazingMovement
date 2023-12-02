@@ -7,9 +7,9 @@
 AnimationCubes::AnimationCubes(const float xzMapSize, const glm::uvec2& numOfCubes) : m_mapSize{ xzMapSize }, m_numCubes{ numOfCubes } {
 	MakeCubes();
 
-	SetRandomScaleAnimation();
-	/*SetWaveAnimation();*/
-	//SettingBeforeSort();
+	//SetRandomScaleAnimation();
+	//SetWaveAnimation();
+	SettingBeforeSort();
 }
 
 AnimationCubes::~AnimationCubes() { }
@@ -17,6 +17,8 @@ AnimationCubes::~AnimationCubes() { }
 void AnimationCubes::MakeCubes() {
 	glm::vec3 initColor{ 0.f, 1.f, 0.f };
 	m_cubes.resize(m_numCubes.y);
+
+	float epsilon = 0.01f;
 
 	float width = m_mapSize / (m_numCubes.x);
 	float height = m_mapSize / (m_numCubes.y);
@@ -28,8 +30,21 @@ void AnimationCubes::MakeCubes() {
 	for (uint32 z = 0; z < m_numCubes.y; ++z) {
 		for (uint32 x = 0; x < m_numCubes.x; ++x) {
 			glm::vec3 scale{ width, 1.f, height };
-			glm::vec3 position{ leftTop.x + width * x, 0.f, leftTop.y + height * z };
+			glm::vec3 position{ leftTop.x + width * x + epsilon, 0.f, leftTop.y + height * z };
 			m_cubes[z].emplace_back(initColor, position, scale);
+		}
+	}
+}
+
+void AnimationCubes::SuffleData() {
+
+}
+
+void AnimationCubes::ResetColor() {
+	glm::vec3 initColor{ 0.f, 1.f, 0.f };
+	for (auto& cubeVec : m_cubes) {
+		for (auto& cube : cubeVec) {
+			cube.SetColor(initColor);
 		}
 	}
 }
@@ -51,6 +66,7 @@ void AnimationCubes::SwapData(int32 idx1, int32 idx2) {
 }
 
 void AnimationCubes::SelectData(int32 idx1, int32 idx2) {
+	ResetColor();
 	for (int z = 0; z < m_numCubes.y; ++z) {
 		m_cubes[z][idx1].Select();
 		m_cubes[z][idx2].Select();
@@ -58,9 +74,15 @@ void AnimationCubes::SelectData(int32 idx1, int32 idx2) {
 }
 
 void AnimationCubes::StepSort() {
-	if (!m_sortFunc) return;
+	if (m_sortEnd) {
+		return;
+	}
 
-	BubbleSort();
+	if (m_timeCount >= m_sortTime) {
+		BubbleSort();
+		m_timeCount = 0.f;
+		return;
+	}
 	
 	m_timeCount += m_deltaTime;
 }
@@ -122,16 +144,20 @@ void AnimationCubes::BubbleSort() {
 	if (CompareData(m_bubbleData.targetIdx, m_bubbleData.selectIdx)) {
 		SwapData(m_bubbleData.targetIdx, m_bubbleData.selectIdx);
 	}
+	m_bubbleData.targetIdx += 1;
+	SelectData(m_bubbleData.selectIdx, m_bubbleData.targetIdx);
 }
 
 void AnimationCubes::Update(float deltaTime) {
 	m_deltaTime = deltaTime;
 
-	for (auto& cubeVec : m_cubes) {
-		for (auto& cube : cubeVec) {
-			cube.Update(deltaTime);
-		}
-	}
+	//for (auto& cubeVec : m_cubes) {
+	//	for (auto& cube : cubeVec) {
+	//		cube.Update(deltaTime);
+	//	}
+	//}
+
+	StepSort();
 }
 
 void AnimationCubes::Render() {

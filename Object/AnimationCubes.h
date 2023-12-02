@@ -1,7 +1,7 @@
 #pragma once
 
 struct BubbleSortDT {
-	int32 selectIdx{ };
+	int32 selectIdx{ 1 };
 	int32 targetIdx{ };
 };
 
@@ -28,7 +28,7 @@ private:
 	std::pair<float, float> m_scaleRange{ 0.1f, 50.f };
 	std::pair<float, float> m_animationSpeedRange{ 1.f, 50.f };
 
-	float m_sortTime{ };
+	float m_sortTime{ 1.f };
 	float m_timeCount{ };
 
 	void(AnimationCubes::*m_sortFunc)(){ nullptr };
@@ -39,6 +39,8 @@ private:
 private:
 	void MakeCubes();
 
+	void SuffleData();
+	void ResetColor();
 	bool CompareData(int32 idx1, int32 idx2);
 	void SwapData(int32 idx1, int32 idx2);
 	void SelectData(int32 idx1, int32 idx2);
