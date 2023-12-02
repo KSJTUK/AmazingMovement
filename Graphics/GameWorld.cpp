@@ -9,6 +9,7 @@
 
 #include "Object/AnimationCubes.h"
 #include "Object/LightObject.h"
+#include "Util/RandomEngine.h"
 
 GameWorld::GameWorld() { }
 
@@ -135,6 +136,8 @@ void GameWorld::Update(float deltaTime) {
 	m_camera->Update(m_deltaTime);
 
 	m_testAnimationCubes->Update(m_deltaTime);
+
+	std::cout << randomEngine->GetRandFloat(-10000.f, 10000.f) << "\n";
 }
 
 void GameWorld::Render() {

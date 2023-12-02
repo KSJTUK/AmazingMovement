@@ -10,6 +10,7 @@
 #include <gl/glm/gtx/vector_angle.hpp>
 #include <gl/glm/gtc/quaternion.hpp>	
 
+#include <random>
 #include <algorithm>
 #include <memory>
 #include <vector>
@@ -76,6 +77,7 @@ struct WindowInfo {
 };
 
 extern std::unique_ptr<class Engine> engine;
+extern std::unique_ptr<class RandomEngine> randomEngine;
 
 namespace constants {
 	extern float gravity;

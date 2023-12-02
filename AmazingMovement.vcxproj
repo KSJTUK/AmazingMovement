@@ -164,6 +164,7 @@
     </ClCompile>
     <ClCompile Include="Util\callbacks.cpp" />
     <ClCompile Include="Util\Engine.cpp" />
+    <ClCompile Include="Util\RandomEngine.cpp" />
     <ClCompile Include="Util\stb_image.cpp" />
     <ClCompile Include="Util\TextureComponent.cpp" />
     <ClCompile Include="Util\Timer.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Util\callbacks.h" />
     <ClInclude Include="Util\Engine.h" />
+    <ClInclude Include="Util\RandomEngine.h" />
     <ClInclude Include="Util\stb_image.h" />
     <ClInclude Include="Util\TextureComponent.h" />
     <ClInclude Include="Util\Timer.h" />
