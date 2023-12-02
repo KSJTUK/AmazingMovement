@@ -52,6 +52,12 @@
     <Filter Include="리소스 파일\LightObject">
       <UniqueIdentifier>{cd1a81ee-c8d4-421b-837d-3dfed3740bcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Object">
+      <UniqueIdentifier>{72dd2984-1c07-4180-9c78-7df564dbfcba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{c1fdb46d-4036-4047-89ee-35ff0b946098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -97,7 +103,16 @@
       <Filter>소스 파일\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Terrain.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Object.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Cube.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\LightObject.cpp">
+      <Filter>소스 파일\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +156,16 @@
       <Filter>헤더 파일\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Terrain.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Object.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Cube.h">
+      <Filter>헤더 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\LightObject.h">
+      <Filter>헤더 파일\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

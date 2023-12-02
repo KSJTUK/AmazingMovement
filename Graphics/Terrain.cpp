@@ -133,6 +133,8 @@ void Terrain::Update(float deltaTime) {
 }
 
 void Terrain::Render() {
+	TERRAINSHADER->SetUniformInt("heightMap", 0);
+	TERRAINSHADER->SetUniformInt("heightMapTexture", 1);
 	TERRAINSHADER->UseProgram();
 	//glActiveTexture(GL_TEXTURE0);
 	//glBindTexture(GL_TEXTURE_2D, m_textureID);
@@ -141,8 +143,6 @@ void Terrain::Render() {
 	//glBindVertexArray(0);
 	m_textureComponent->BindingTexture(HEIGHT_MAP);
 	m_textureComponent->BindingTexture(TERRAIN_TEX);
-	TERRAINSHADER->SetUniformInt("heightMap", 0);
-	TERRAINSHADER->SetUniformInt("heightMapTexture", 1);
 	m_vertexBuffer->SetDrawMode(GL_PATCHES);
 	m_vertexBuffer->SetPatchParameters(4);
 	m_vertexBuffer->Render();

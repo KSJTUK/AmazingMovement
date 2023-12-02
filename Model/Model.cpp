@@ -222,13 +222,5 @@ void Model::Update() {
 }
 
 void Model::Render() {
-	if (m_textureComponent) {
-		m_textureComponent->BindingTexture(0);
-		OBJECTSHADER->SetUniformBool("notextureID", false);
-	}
-	else {
-		OBJECTSHADER->SetUniformBool("notextureID", true);
-	}
-
 	m_graphicsBuffer->Render();
 }

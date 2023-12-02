@@ -8,14 +8,10 @@ layout (location = 2) in vec3 in_Normal; //--- 정점 노멀 변수: attribute positio
 
 uniform mat4 perspective;
 uniform mat4 view;
-uniform mat4 parentTransform;
-uniform mat4 initTransform;
-uniform mat4 modelTransform;
+uniform mat4 transform;
 
 void main(void)
 {
-	mat4 transform = parentTransform * modelTransform * initTransform;
-
 	gl_Position = perspective * view * transform * vec4(in_Position, 1.0f);
 
 }

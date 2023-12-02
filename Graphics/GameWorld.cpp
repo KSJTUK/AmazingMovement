@@ -7,6 +7,9 @@
 #include "Graphics/SkyBox.h"
 #include "Graphics/Terrain.h"
 
+#include "Object/Cube.h"
+#include "Object/LightObject.h"
+
 GameWorld::GameWorld() { }
 
 GameWorld::~GameWorld() { }
@@ -82,8 +85,11 @@ void GameWorld::SetViewMatAllShader() {
 
 void GameWorld::InitModelList() {
 	// 모델리스트를 생성하고 모델 불러오기
+	OBJECTSHADER->UseProgram();
 	MODELLIST->Init();
 	MODELLIST->LoadModel("cube.obj");
+	MODELLIST->LoadModel("sphere.obj");
+	OBJECTSHADER->UnUseProgram();
 }
 
 void GameWorld::SetGLGraphicOptions() {
@@ -98,12 +104,25 @@ void GameWorld::Init() {
 	CreateShaderPrograms();
 	SetGLGraphicOptions();
 
+	InitModelList();
+
 	// 카메라 생성
 	m_camera = std::make_unique<Camera>();
 
 	// SkyBox 생성
 	m_background = std::make_unique<SkyBox>();
 	m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
+
+	// 테스트용 큐브 생성
+	m_testCube = std::make_unique<Cube>("cube", glm::vec3{ 0.f, 1.f, 0.f });
+	m_testCube->SetPosition(glm::vec3{ 0.f, 10.f, 0.f });
+	m_testCube->SetScale(glm::vec3{ 5.f });
+
+	m_testLight = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
+	m_testLight->SetPosition(glm::vec3{ 0.f, 100.f, 0.f });
+	m_testLight->SetScale(glm::vec3{ 0.1f });
+
+	m_testLight->DirLightOn();
 
 	InitModelList();
 
@@ -128,7 +147,11 @@ void GameWorld::Render() {
 	SetViewMatAllShader();
 
 	m_background->Render();
-	//m_ground->Render();
+
+	m_testLight->Render();
+	m_ground->Render();
+
+	m_testCube->Render();
 
 	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
 

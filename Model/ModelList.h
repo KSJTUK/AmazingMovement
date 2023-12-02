@@ -13,8 +13,8 @@ public:
 	static void Destroy();
 
 private:
-	const std::string m_defaultObjectFilePath{ ".\\ObjModel\\" };
-	const std::string m_defaultTextureFilePath{ ".\\textures\\" };
+	const std::string m_defaultObjectFilePath{ "./ObjModel/" };
+	const std::string m_defaultTextureFilePath{ "./Textures/" };
 
 	// 葛胆甸阑 历厘且 甘 按眉 积己
 	std::unordered_map<std::string, std::shared_ptr<class Model>> m_modelList{ };

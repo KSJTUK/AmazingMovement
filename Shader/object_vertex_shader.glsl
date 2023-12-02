@@ -8,9 +8,7 @@ layout (location = 2) in vec3 in_Normal; //--- 정점 노멀 변수: attribute positio
 
 uniform mat4 perspective;
 uniform mat4 view;
-uniform mat4 modelsParentTransform;
-uniform mat4 modelInitTransform;
-uniform mat4 modelTransform;
+uniform mat4 transform;
 
 // lighting
 out vec3 vs_out_normal;
@@ -19,8 +17,6 @@ out vec3 vs_out_fragPosition;
 
 void main(void)
 {
-	mat4 transform = modelsParentTransform * modelTransform * modelInitTransform;
-
 	vs_out_fragPosition = vec3(transform * vec4(in_Position, 1.0f));
 	vs_out_normal = mat3(transpose(inverse(transform))) * in_Normal;
 	vs_out_texture = in_Texture;
