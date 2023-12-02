@@ -44,7 +44,7 @@ void Timer::Update() {
         m_fps = (float)m_frameCount / m_timeElapsed;
         m_frameCount = 0;
         m_timeElapsed = 0.0f;
-        std::cout << m_fps << std::endl;
+        //std::cout << m_fps << std::endl;
     }
 
     // 이전 시간을 현재시간으로 변경
