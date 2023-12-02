@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AniamtionCubes.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\GameWorld.cpp" />
     <ClCompile Include="Graphics\GraphicBuffers.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Util\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AniamtionCubes.h" />
     <ClInclude Include="Graphics\Camera.h" />
     <ClInclude Include="Graphics\GameWorld.h" />
     <ClInclude Include="Graphics\GraphicBuffers.h" />

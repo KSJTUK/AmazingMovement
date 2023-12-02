@@ -3,7 +3,7 @@
 #include "Model/Model.h"
 #include "Cube.h"
 
-Cube::Cube(const std::string modelTag, const glm::vec3& color) : Object{ modelTag, color } { }
+Cube::Cube(const glm::vec3& color) : Object{ "cube", color } { }
 
 Cube::~Cube() { }
 

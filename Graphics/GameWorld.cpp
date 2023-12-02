@@ -114,7 +114,7 @@ void GameWorld::Init() {
 	m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	// 테스트용 큐브 생성
-	m_testCube = std::make_unique<Cube>("cube", glm::vec3{ 0.f, 1.f, 0.f });
+	m_testCube = std::make_unique<Cube>(glm::vec3{ 0.f, 1.f, 0.f });
 	m_testCube->SetPosition(glm::vec3{ 0.f, 10.f, 0.f });
 	m_testCube->SetScale(glm::vec3{ 5.f });
 

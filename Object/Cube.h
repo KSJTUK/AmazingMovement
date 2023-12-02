@@ -3,10 +3,12 @@
 
 class Cube : public Object {
 public:
-	Cube(const std::string modelTag, const glm::vec3& color);
+	Cube(const glm::vec3& color);
 	virtual ~Cube();
 
 private:
+	const std::string m_modelTag{ "cube" };
+
 	float m_deltaTime{ };
 
 	std::pair<float, float> m_scaleAnimationRange{ 1.f, 50.f };
