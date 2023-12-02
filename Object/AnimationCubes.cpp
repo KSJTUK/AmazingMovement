@@ -40,30 +40,30 @@ void AnimationCubes::MakeSortCubes() {
 	glm::vec3 initColor{ 0.f, 1.f, 0.f };
 	m_cubes.resize(1);
 
-	float width = m_mapSize / (m_numCubes.x);
-	float height = m_mapSize / (m_numCubes.y);
-	// 카메라 기준 왼쪽 위
-	glm::vec2 leftTop{ -width * (m_numCubes.x / 2.f), -height * (m_numCubes.y / 2.f) };
+	float width = m_mapSize / (m_numSortData);
+	float height = m_mapSize;
+	// 카메라 기준 왼쪽
+	float left = -width * (m_numSortData / 2.f);
 
-	for (uint32 z = 0; z < m_numCubes.y; ++z) {
+	for (uint32 z = 0; z < 1; ++z) {
 		for (uint32 x = 0; x < m_numSortData; ++x) {
 			glm::vec3 scale{ width / 2.f, 1.f, height / 2.f };
-			glm::vec3 position{ leftTop.x + width * x, 20.f, leftTop.y + height * z };
+			glm::vec3 position{ left + width * x, 20.f, 0.f };
 			m_cubes[z].emplace_back(initColor, position, scale);
 		}
 	}
 }
 
 void AnimationCubes::SuffleData() {
-	std::vector<glm::vec3> scaleVec{ m_numCubes.x };
-	for (uint32 i = 0; i < m_numCubes.x; ++i) {
+	std::vector<glm::vec3> scaleVec{ static_cast<uint64>(m_numSortData) };
+	for (uint32 i = 0; i < m_numSortData; ++i) {
 		scaleVec[i] = m_cubes[0][i].GetScale();
 	}
 
 	std::shuffle(scaleVec.begin(), scaleVec.end(), randomEngine->GetRandomEngine());
 
-	for (uint32 i = 0; i < m_numCubes.x; ++i) {
-		for (uint32 j = 0; j < m_numCubes.y; ++j) {
+	for (uint32 i = 0; i < m_numSortData; ++i) {
+		for (uint32 j = 0; j < 1; ++j) {
 			m_cubes[j][i].SetScale(scaleVec[i]);
 		}
 	}
@@ -86,7 +86,7 @@ bool AnimationCubes::CompareData(int32 idx1, int32 idx2) {
 }
 
 void AnimationCubes::SwapData(int32 idx1, int32 idx2) {
-	for (int z = 0; z < m_numCubes.y; ++z) {
+	for (int z = 0; z < 1; ++z) {
 		glm::vec3 leftScale{ m_cubes[z][idx1].GetScale() };
 		glm::vec3 rightScale{ m_cubes[z][idx2].GetScale() };
 		m_cubes[z][idx2].SetScale(leftScale);
@@ -96,7 +96,7 @@ void AnimationCubes::SwapData(int32 idx1, int32 idx2) {
 
 void AnimationCubes::SelectData(int32 idx1, int32 idx2) {
 	ResetColor();
-	for (int z = 0; z < m_numCubes.y; ++z) {
+	for (int z = 0; z < 1; ++z) {
 		m_cubes[z][idx1].Select();
 		m_cubes[z][idx2].Select();
 	}
@@ -118,8 +118,8 @@ void AnimationCubes::StepSort() {
 
 void AnimationCubes::SettingBeforeSort() {
 	float scaleStep = m_scaleRange.second * 4.f / (m_numSortData);
-	for (uint32 z = 0; z < m_numCubes.y; ++z) {
-		for (uint32 x = 0; x < m_numCubes.x; ++x) {
+	for (uint32 z = 0; z < 1; ++z) {
+		for (uint32 x = 0; x < m_numSortData; ++x) {
 			m_cubes[z][x].SetScaleY(scaleStep * x);
 		}
 	}
@@ -163,7 +163,7 @@ void AnimationCubes::BubbleSort() {
 	SelectData(m_bubbleData.selectIdx, m_bubbleData.targetIdx);
 	if (m_bubbleData.targetIdx >= m_bubbleData.selectIdx) {
 		m_bubbleData.selectIdx += 1;
-		if (m_bubbleData.selectIdx >= m_numCubes.x) {
+		if (m_bubbleData.selectIdx >= m_numSortData) {
 			m_sortEnd = true;
 			return;
 		}
@@ -178,6 +178,10 @@ void AnimationCubes::BubbleSort() {
 		SwapData(m_bubbleData.targetIdx, m_bubbleData.selectIdx);
 	}
 	m_bubbleData.targetIdx += 1;
+}
+
+void AnimationCubes::QuickSort() {
+
 }
 
 void AnimationCubes::Update(float deltaTime) {

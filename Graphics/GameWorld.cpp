@@ -128,7 +128,7 @@ void GameWorld::Init() {
 	//m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	// 테스트용 큐브 생성
-	m_testAnimationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ 100, 1 });
+	m_testAnimationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ 50, 50 });
 
 	m_testLight = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
 	m_testLight->SetPosition(glm::vec3{ 0.f, 100.f, 30.f });

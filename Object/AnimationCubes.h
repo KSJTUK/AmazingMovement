@@ -39,6 +39,9 @@ private:
 
 private:
 	void MakeCubes();
+
+	// 모든 sort 함수들이 사용할 함수들
+	// ----------------------------------
 	void MakeSortCubes();
 
 	void SuffleData();
@@ -50,6 +53,7 @@ private:
 	void StepSort();
 
 	void SettingBeforeSort();
+	// ----------------------------------
 
 public:
 	void SetScaleRange(const float& min, const float& max);
@@ -58,6 +62,7 @@ public:
 
 	void SetSortAnimation();
 	void BubbleSort();
+	void QuickSort();
 
 public:
 	void Update(float deltaTime);
