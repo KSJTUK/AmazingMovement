@@ -12,7 +12,7 @@ private:
 	glm::uvec2 m_numCubes{ };
 
 	std::pair<float, float> m_scaleRange{ 0.1f, 50.f };
-	std::pair<float, float> m_animationSpeedRange{ 10.f, 30.f };
+	std::pair<float, float> m_animationSpeedRange{ 1.f, 30.f };
 
 public:
 	void SetScaleRange(const float& min, const float& max);
