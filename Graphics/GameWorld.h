@@ -8,6 +8,7 @@ public:
 private:
 	bool m_isInited{ false };
 	std::unique_ptr<class Camera> m_camera{ };
+	std::unique_ptr<class Camera> m_minimapCamera{ };
 
 private:
 	// 카메라 외부파라미터 (투영행렬을 생성할 떄 쓰일 변수들)
@@ -22,6 +23,7 @@ private:
 	float m_far{ 10000.f };           // 시야 절두체의 먼 평면과의 거리
 
 	glm::mat4 m_perspectiveMatrix{ 1.f };
+	glm::mat4 m_orthoMatrix{ 1.f };
 
 	std::unique_ptr<class AnimationCubes> m_animationCubes{ };
 	std::unique_ptr<class LightObject> m_light{ };
@@ -35,6 +37,7 @@ public:
 	// setter
 	void SetWindowInfo(std::shared_ptr<struct WindowInfo>& winInfo);
 	void CalcPerspectiveMat();
+	void CalcOrthoMat();
 
 public:
 	// 외부 키입력을 카메라에게 전해주는 함수
@@ -50,6 +53,7 @@ public:
 	void SetGLGraphicOptions();
 
 	void WorldRender();
+	void MinimapRender();
 
 public:
 	void Init();

@@ -10,12 +10,18 @@ struct SelectionSortDT {
 	int32 targetIdx{ };
 };
 
+struct InsertionSortDT {
+	int32 selectIdx{ 1 };
+	int32 targetIdx{ };
+};
+
 struct QuickSortDT {
 	int32 left{ };
 	int32 right{ };
 	// 재귀 없이 구현하기위해 배열 스택 사용
 	int32 stackTop{ -1 };
-	int32 stack[200]{ };
+	int32 lStack[200]{ };
+	int32 rStack[200]{ };
 
 	bool partitionEnd{ true };
 
@@ -29,6 +35,8 @@ struct QuickSortDT {
 
 	bool selectedLeft{ };
 	bool selectedRight{ };
+	bool selectFailLeft{ };
+	bool selectFailRight{ };
 };
 
 enum class ANIMATION_ENUM {
@@ -54,7 +62,7 @@ private:
 	std::pair<float, float> m_scaleRange{ 0.1f, 50.f };
 	std::pair<float, float> m_animationSpeedRange{ 1.f, 50.f };
 
-	float m_sortTime{ 0.1f };
+	float m_sortTime{ 0.3f };
 	float m_timeCount{ };
 
 	const int m_numSortData{ 100 };
@@ -63,6 +71,8 @@ private:
 
 	BubbleSortDT m_bubbleData{ };
 	QuickSortDT m_qSortData{ 0, m_numSortData - 1, -1, { }, true };
+	InsertionSortDT m_insertionData{ };
+	SelectionSortDT m_selectionData{ };
 
 private:
 	void MakeCubes();

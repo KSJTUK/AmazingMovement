@@ -82,6 +82,9 @@ bool AnimationCubes::CompareData(int32 idx1, int32 idx2) {
 	if (m_cubes[0][idx1].GetScaleY() >= m_cubes[0][idx2].GetScaleY()) {
 		return true;
 	}
+
+	if (idx1 == idx2) return true;
+
 	return false;
 }
 
@@ -107,8 +110,10 @@ void AnimationCubes::StepSort() {
 		return;
 	}
 	//BubbleSort();
+	//QuickSort();
+	//SelectionSort();
+	InsertionSort();
 
-	QuickSort();
 	if (m_timeCount >= m_sortTime) {
 		m_timeCount = 0.f;
 		return;
@@ -130,49 +135,15 @@ void AnimationCubes::SettingBeforeSort() {
 }
 
 void AnimationCubes::QuickSortInit() {
-	m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.left;
-	m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.right;
+	++m_qSortData.stackTop;
+	m_qSortData.lStack[m_qSortData.stackTop] = m_qSortData.left;
+	m_qSortData.rStack[m_qSortData.stackTop] = m_qSortData.right;
 }
 
 void AnimationCubes::QuickSortPartition() {
 	ResetColor();
 	SelectData(m_qSortData.topLeft, m_qSortData.topRight);
-	m_cubes[0][m_qSortData.pivot].Select();
-
-	if (!m_qSortData.selectedLeft) {
-		//if (m_qSortData.topRight <= m_qSortData.topLeft) {
-		//	m_qSortData.selectedLeft = true;
-		//	return;
-		//}
-
-		if (CompareData(m_qSortData.topLeft, m_qSortData.pivot)) {
-			m_qSortData.selectedLeft = true;
-			return;
-		}
-		m_qSortData.topLeft++;
-	}
-
-	if (!m_qSortData.selectedRight) {
-		//if (m_qSortData.topRight <= m_qSortData.topLeft) {
-		//	m_qSortData.selectedRight = true;
-		//	return;
-		//}
-
-		if (CompareData(m_qSortData.pivot, m_qSortData.topRight)) {
-			m_qSortData.selectedRight = true;
-			return;
-		}
-		m_qSortData.topRight--;
-	}
-
-	if (m_qSortData.topLeft >= m_qSortData.topRight) {
-		m_qSortData.partitionEnd = true;
-		return;
-	}
-
-	SwapData(m_qSortData.topLeft++, m_qSortData.topRight--);
-	m_qSortData.selectedLeft = false;
-	m_qSortData.selectedRight = false;
+	m_cubes[0][m_qSortData.pivot].SetColor(glm::vec3{ 0.f, 0.f, 1.f });
 }
 
 void AnimationCubes::SetScaleRange(const float& min, const float& max) {
@@ -205,7 +176,7 @@ void AnimationCubes::SetWaveAnimation() {
 void AnimationCubes::SetSortAnimation() {
 	MakeSortCubes();
 	SettingBeforeSort();
-	QuickSortInit();
+	/*QuickSortInit();*/
 }
 
 void AnimationCubes::BubbleSort() {
@@ -230,10 +201,70 @@ void AnimationCubes::BubbleSort() {
 }
 
 void AnimationCubes::InsertionSort() {
+	SelectData(m_insertionData.selectIdx, m_insertionData.targetIdx);
+	m_cubes[0][m_insertionData.selectIdx].SetColor(glm::vec3{ 0.f, 0.f, 1.f });
 
+
+	if (m_insertionData.targetIdx == 0) {
+		if (CompareData(m_insertionData.selectIdx, m_insertionData.targetIdx)) {
+			++m_insertionData.targetIdx;
+		}
+
+		SwapData(m_insertionData.selectIdx, m_insertionData.targetIdx);
+		for (int i = m_insertionData.targetIdx + 1; i < m_insertionData.selectIdx; ++i) {
+			SwapData(i, m_insertionData.selectIdx);
+		}
+
+		++m_insertionData.selectIdx;
+		if (m_insertionData.selectIdx >= m_numSortData) {
+			m_sortEnd = true;
+			return;
+		}
+		m_insertionData.targetIdx = m_insertionData.selectIdx - 1;
+		return;
+	}
+
+	if (CompareData(m_insertionData.selectIdx, m_insertionData.targetIdx)) {
+		++m_insertionData.targetIdx;
+		SwapData(m_insertionData.selectIdx, m_insertionData.targetIdx);
+		for (int i = m_insertionData.targetIdx + 1; i < m_insertionData.selectIdx; ++i) {
+			SwapData(i, m_insertionData.selectIdx);
+		}
+
+		++m_insertionData.selectIdx;
+		if (m_insertionData.selectIdx >= m_numSortData) {
+			m_sortEnd = true;
+			return;
+		}
+		m_insertionData.targetIdx = m_insertionData.selectIdx - 1;
+		return;
+	}
+	if (m_insertionData.targetIdx == 0) {
+		int a = 1;
+	}
+
+	--m_insertionData.targetIdx;
 }
 
 void AnimationCubes::SelectionSort() {
+	SelectData(m_selectionData.selectIdx, m_selectionData.targetIdx);
+
+	if (m_selectionData.selectIdx >= m_numSortData - 1) {
+		m_sortEnd = true;
+		return;
+	}
+
+	++m_selectionData.targetIdx;
+	
+	if (m_selectionData.targetIdx >= m_numSortData) {
+		++m_selectionData.selectIdx;
+		m_selectionData.targetIdx = m_selectionData.selectIdx;
+		return;
+	}
+
+	if (CompareData(m_selectionData.selectIdx, m_selectionData.targetIdx)) {
+		SwapData(m_selectionData.selectIdx, m_selectionData.targetIdx);
+	}
 
 }
 
@@ -242,44 +273,7 @@ void AnimationCubes::MergeSort() {
 }
 
 void AnimationCubes::QuickSort() {
-	if (m_qSortData.partitionEnd) {
-		if (m_qSortData.popData == -1) {
-			int32 stRight = m_qSortData.stack[m_qSortData.stackTop--];
-			m_qSortData.topRight = stRight;
-			m_qSortData.right = stRight;
-			int32 stLeft = m_qSortData.stack[m_qSortData.stackTop--];
-			m_qSortData.topLeft = stLeft;
-			m_qSortData.left = stLeft;
-			m_qSortData.pivot = (m_qSortData.left + m_qSortData.right) / 2;
-
-			m_qSortData.partitionEnd = false;
-			m_qSortData.popData = 0;
-			return;
-		}
-
-		if (m_qSortData.left < m_qSortData.topRight) {
-			m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.left;
-			m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.topRight;	
-			std::cout << "stack push: " << m_qSortData.left << ",  " << m_qSortData.topRight << std::endl;
-		}
-
-		if (m_qSortData.right > m_qSortData.topLeft) {
-			m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.topLeft;
-			m_qSortData.stack[++m_qSortData.stackTop] = m_qSortData.right;
-			std::cout << "stack push: " << m_qSortData.topLeft << ",  " << m_qSortData.right << std::endl;
-		}
-		std::cout << "stack topL " << m_qSortData.stackTop << std::endl;
-
-		m_qSortData.popData = -1;
-
-		if (m_qSortData.stackTop < 0) {
-			m_sortEnd = true;
-			return;
-		}
-	}
-	else {
-		QuickSortPartition();
-	}
+	
 }
 
 void AnimationCubes::Update(float deltaTime) {

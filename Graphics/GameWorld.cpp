@@ -122,6 +122,7 @@ void GameWorld::Init() {
 
 	// 朝五虞 持失
 	m_camera = std::make_unique<Camera>();
+	m_minimapCamera = std::make_unique<Camera>();
 
 	// SkyBox 持失
 	m_background = std::make_unique<SkyBox>();
