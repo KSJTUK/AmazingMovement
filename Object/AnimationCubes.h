@@ -62,6 +62,10 @@ private:
 	std::pair<float, float> m_scaleRange{ 0.1f, 50.f };
 	std::pair<float, float> m_animationSpeedRange{ 1.f, 50.f };
 
+	bool m_animationOn{ };
+	bool m_inSortAnimation{ };
+	bool m_startSort{ };
+
 	float m_sortTime{ 0.3f };
 	float m_timeCount{ };
 
@@ -73,6 +77,8 @@ private:
 	QuickSortDT m_qSortData{ 0, m_numSortData - 1, -1, { }, true };
 	InsertionSortDT m_insertionData{ };
 	SelectionSortDT m_selectionData{ };
+
+	int m_sorting{ 0 };
 
 private:
 	void MakeCubes();
@@ -106,7 +112,10 @@ public:
 	void MergeSort();
 	void QuickSort();
 
+	void PrintKeyInfo();
+
 public:
+	void Input(unsigned char key, bool down);
 	void Update(float deltaTime);
 	void Render();
 };

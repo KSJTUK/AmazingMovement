@@ -35,8 +35,13 @@ void GameWorld::CalcPerspectiveMat() {
 	m_perspectiveMatrix = glm::perspective(glm::radians(halfFovy), aspect, m_near, m_far);
 }
 
+void GameWorld::CalcOrthoMat() {
+	m_orthoMatrix = glm::ortho(0.0f, m_windowInfo->fWidth, 0.0f, m_windowInfo->fHeight, m_near, m_far);;
+}
+
 void GameWorld::Input(unsigned char key, bool down) {
 	m_camera->Input(key, down);
+	m_animationCubes->Input(key, down);
 }
 
 void GameWorld::SpecialInput(int key, bool down) {
@@ -74,14 +79,20 @@ void GameWorld::SetPerspectiveAllShader() {
 	LIGHTOBJECTSHADER->SetUniformMat4("perspective", m_perspectiveMatrix);
 }
 
-void GameWorld::SetViewMatAllShader() {
-	glm::mat4 cameraViewMatrix{ m_camera->GetViewMat() };
+void GameWorld::SetOrthoAllShader() {
+	BACKGROUNDSHADER->SetUniformMat4("perspective", m_orthoMatrix);
+	TERRAINSHADER->SetUniformMat4("perspective", m_orthoMatrix);
+	PARTICLESHADER->SetUniformMat4("perspective", m_orthoMatrix);
+	OBJECTSHADER->SetUniformMat4("perspective", m_orthoMatrix);
+	LIGHTOBJECTSHADER->SetUniformMat4("perspective", m_orthoMatrix);
+}
 
-	BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(cameraViewMatrix)));
-	TERRAINSHADER->SetUniformMat4("view", cameraViewMatrix);
-	PARTICLESHADER->SetUniformMat4("view", cameraViewMatrix);
-	OBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
-	LIGHTOBJECTSHADER->SetUniformMat4("view", cameraViewMatrix);
+void GameWorld::SetViewMatAllShader(const glm::mat4& viewMat) {
+	BACKGROUNDSHADER->SetUniformMat4("view", glm::mat4(glm::mat3(viewMat)));
+	TERRAINSHADER->SetUniformMat4("view", viewMat);
+	PARTICLESHADER->SetUniformMat4("view", viewMat);
+	OBJECTSHADER->SetUniformMat4("view", viewMat);
+	LIGHTOBJECTSHADER->SetUniformMat4("view", viewMat);
 }
 
 void GameWorld::InitModelList() {
@@ -102,9 +113,11 @@ void GameWorld::SetGLGraphicOptions() {
 }
 
 void GameWorld::WorldRender() {
+	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
+
 	m_camera->Render();
 	SetPerspectiveAllShader();
-	SetViewMatAllShader();
+	SetViewMatAllShader(m_camera->GetViewMat());;
 
 	m_background->Render();
 
@@ -112,6 +125,57 @@ void GameWorld::WorldRender() {
 	//m_ground->Render();
 
 	m_animationCubes->Render();
+}
+
+void GameWorld::MinimapRender() {
+	int minimapWidth = m_windowInfo->width / 4;
+	int minimapHeight = m_windowInfo->height / 4;
+	glViewport((m_windowInfo->width) - minimapWidth, (m_windowInfo->height) - minimapHeight, minimapWidth, minimapHeight);
+
+	m_minimapCamera->Render();
+
+	SetOrthoAllShader();
+	SetViewMatAllShader(m_minimapCamera->GetViewMat());
+
+	m_background->Render();
+
+	m_light->Render();
+	//m_ground->Render();
+	m_animationCubes->Render();
+}
+
+void GameWorld::GenerateAnimationCube() {
+	int w{ }, h{ };
+	while (true) {
+		std::cout << "가로와 세로를 입력해주세요 크기제한은 30입니다" << std::endl;
+		std::cout << "30을 넘어서는 크기를 입력하면 크기가 30으로 고정됩니다." << std::endl;
+		std::cin >> w;
+		if (!std::cin) {
+			std::cout << "다시 입력해주세여" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			continue;
+		}
+
+		std::cin >> h;
+		if (!std::cin) {
+			std::cout << "다시 입력해주세여" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(INT_MAX, '\n');
+			continue;
+		}
+
+
+		break;
+	}
+
+	w = static_cast<int>(w);
+	w = static_cast<int>(h);
+	std::clamp(w, 0, 30);
+	std::clamp(h, 0, 30);
+
+	m_animationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ w, h });
+	m_animationCubes->PrintKeyInfo();
 }
 
 void GameWorld::Init() {
@@ -123,13 +187,14 @@ void GameWorld::Init() {
 	// 카메라 생성
 	m_camera = std::make_unique<Camera>();
 	m_minimapCamera = std::make_unique<Camera>();
+	m_minimapCamera->CameraPositionSet(glm::vec3{ 0.f, 500.f, 800.f });
+	m_minimapCamera->CameraViewPointSet(glm::vec3{ 0.f, -0.5f, -1.f });
 
 	// SkyBox 생성
 	m_background = std::make_unique<SkyBox>();
 	//m_ground = std::make_unique<Terrain>(glm::uvec2{ 20, 20 });
 
 	// 테스트용 큐브 생성
-	m_animationCubes = std::make_unique<AnimationCubes>(500.f, glm::uvec2{ 20, 20 });
 
 	m_light = std::make_unique<LightObject>("sphere", glm::vec3{ 1.f, 1.f, 1.f });
 	m_light->SetPosition(glm::vec3{ 0.f, 100.f, 30.f });
@@ -143,11 +208,13 @@ void GameWorld::Init() {
 	CalcPerspectiveMat();
 
 	m_isInited = true;
+	GenerateAnimationCube();
 }
 
 void GameWorld::Update(float deltaTime) {
 	m_deltaTime = deltaTime;
 	m_camera->Update(m_deltaTime);
+	m_minimapCamera->Update(m_deltaTime);
 
 	m_animationCubes->Update(m_deltaTime);
 }
@@ -158,7 +225,7 @@ void GameWorld::Render() {
 
 	WorldRender();
 
-	glViewport(0, 0, m_windowInfo->width, m_windowInfo->height);
+	MinimapRender();
 
 	glutSwapBuffers();
 }

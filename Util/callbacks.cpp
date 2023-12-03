@@ -61,7 +61,7 @@ void mouseMotion(int x, int y)
 
 void mousePassiveMotion(int x, int y)
 {
-	//engine->MousePassiveMotionInpit(x, y);
+	engine->MousePassiveMotionInpit(x, y);
 }
 
 void mouseWheel(int dir, int x, int y)

@@ -48,12 +48,15 @@ public:
 
 	void CreateShaderPrograms();
 	void SetPerspectiveAllShader();
-	void SetViewMatAllShader();
+	void SetOrthoAllShader();
+	void SetViewMatAllShader(const glm::mat4& viewMat);
 	void InitModelList();
 	void SetGLGraphicOptions();
 
 	void WorldRender();
 	void MinimapRender();
+
+	void GenerateAnimationCube();
 
 public:
 	void Init();

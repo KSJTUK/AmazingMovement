@@ -5,12 +5,7 @@
 #include "Util/RandomEngine.h"
 
 AnimationCubes::AnimationCubes(const float xzMapSize, const glm::uvec2& numOfCubes) : m_mapSize{ xzMapSize }, m_numCubes{ numOfCubes } {
-	//MakeCubes();
-
-	//SetRandomScaleAnimation();
-	//SetWaveAnimation();
-
-	SetSortAnimation();
+	MakeCubes();
 }
 
 AnimationCubes::~AnimationCubes() { }
@@ -112,7 +107,15 @@ void AnimationCubes::StepSort() {
 	//BubbleSort();
 	//QuickSort();
 	//SelectionSort();
-	InsertionSort();
+	if (m_sorting == 0) {
+		BubbleSort();
+	}
+	else if (m_sorting == 1) {
+		SelectionSort();
+	}
+	else if (m_sorting == 2) {
+		InsertionSort();
+	}
 
 	if (m_timeCount >= m_sortTime) {
 		m_timeCount = 0.f;
@@ -176,7 +179,9 @@ void AnimationCubes::SetWaveAnimation() {
 void AnimationCubes::SetSortAnimation() {
 	MakeSortCubes();
 	SettingBeforeSort();
-	/*QuickSortInit();*/
+	m_insertionData = { };
+	m_selectionData = { };
+	m_bubbleData = { };
 }
 
 void AnimationCubes::BubbleSort() {
@@ -276,16 +281,76 @@ void AnimationCubes::QuickSort() {
 	
 }
 
+void AnimationCubes::PrintKeyInfo() {
+	system("cls");
+	std::cout << "키입력 정보\n";
+	std::cout << "1: 애니메이션 1\n";
+	std::cout << "2: 애니메이션 2\n";
+	std::cout << "3: 버블 정렬 애니메이션\n";
+	std::cout << "4: 선택 정렬 애니메이션\n";
+	std::cout << "5: 삽입정렬 애니메이션\n";
+	std::cout << "정렬 시작\n";
+}
+
+void AnimationCubes::Input(unsigned char key, bool down) {
+	if (key == '1') {
+		MakeCubes();
+		SetRandomScaleAnimation();
+		m_animationOn = true;
+		m_inSortAnimation = false;
+		m_startSort = false;
+	}
+
+	if (key == '2') {
+		MakeCubes();
+		SetWaveAnimation();
+		m_animationOn = true;
+		m_inSortAnimation = false;
+		m_startSort = false;
+	}
+
+	if (key == '3') {
+		SetSortAnimation();
+		m_animationOn = false;
+		m_inSortAnimation = true;
+		m_sorting = 0;
+	}
+
+	if (key == '4') {
+		SetSortAnimation();
+		m_animationOn = false;
+		m_inSortAnimation = true;
+		m_sorting = 1;
+	}
+
+	if (key == '5') {
+		SetSortAnimation();
+		m_animationOn = false;
+		m_inSortAnimation = true;
+		m_sorting = 2;
+	}
+
+	if (key == 'p') {
+		if (m_inSortAnimation) {
+			m_startSort = true;
+		}
+	}
+}
+
 void AnimationCubes::Update(float deltaTime) {
 	m_deltaTime = deltaTime;
 
-	//for (auto& cubeVec : m_cubes) {
-	//	for (auto& cube : cubeVec) {
-	//		cube.Update(deltaTime);
-	//	}
-	//}
+	if (m_animationOn) {
+		for (auto& cubeVec : m_cubes) {
+			for (auto& cube : cubeVec) {
+				cube.Update(deltaTime);
+			}
+		}
+	}
 
-	StepSort();
+	if (m_startSort) {
+		StepSort();
+	}
 }
 
 void AnimationCubes::Render() {
